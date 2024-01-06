@@ -6,22 +6,41 @@
 //
 
 import Foundation
+import Combine
 
 class PlantService {
+    private let session: APIRequestProtocol
+    private let url: URL
     
-    func getData() -> Data {
-        var jsonData = Data()
-        if let jsonFilePath = Bundle.main.path(forResource: "PlantMockData", ofType: "json") {
-            do {
-                let jsonString = try String(contentsOfFile: jsonFilePath)
-                // Now you have the JSON string from the file
-                print(jsonString)
-                jsonData = jsonString.data(using: .utf8)!
-            } catch {
-                print("Error reading JSON file: \(error)")
-                return Data()
-            }
+    init(session: APIRequestProtocol = URLSession.shared, url: URL = URL(string: "http://51.195.117.95:8000/plants")!) {
+        self.session = session
+        self.url = url
+    }
+    
+    func download() -> AnyPublisher<Data, Error> {
+        return session.apiResponse(for: url)
+            .subscribe(on: DispatchQueue.global(qos: .default))
+            .tryMap { try self.handleURLResponse(output: $0) }
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }
+    
+    private func handleURLResponse(output: URLSession.DataTaskPublisher.Output) throws -> Data {
+        guard let response = output.response as? HTTPURLResponse,
+              response.statusCode >= 200 && response.statusCode < 300 else {
+            throw CustomError.badResponse
         }
-        return jsonData
+        return output.data
+    }
+}
+
+enum CustomError: LocalizedError {
+    case badResponse
+    
+    var errorDescription: String? {
+        switch self {
+        case .badResponse:
+            "Otrzymano błędną odpowiedź z serwera :("
+        }
     }
 }

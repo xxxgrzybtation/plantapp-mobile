@@ -12,16 +12,48 @@ struct PlantDetailView: View {
     let plant: Plant
     
     var body: some View {
-        Chart {
-            ForEach(plant.measurement) { dataPoint in
-                BarMark(
-                    x: .value("Date", Date.formatDateFromTimeInterval(dataPoint.date)),
-                    y: .value("Value", dataPoint.value)
-                )
-            }
+        VStack {
+            legend
+                .padding(.bottom)
+         
+            chart
+            .chartScrollableAxes(.horizontal)
+            .padding()
+            .navigationTitle(plant.name)
         }
-        .frame(width: 300, height: 400)
-        .chartYScale(domain: 0...100)
+        .padding()
+    }
+}
+
+extension PlantDetailView {
+    var legend: some View {
+        HStack {
+            VStack(alignment: .leading) {
+                Text("Legenda:")
+                    .font(.title)
+                Group {
+                    Text("Oś Y: Procentowa wilgotność gleby")
+                    Text("Oś X: Data pomiaru")
+                }
+                .font(.subheadline)
+            }
+            Spacer()
+        }
+    }
+    
+    var chart: some View {
+        Chart(plant.data, id: \.timestamp) {
+            BarMark(
+                x: .value("Date", $0.timestamp),
+                y: .value("Value", $0.value), width: 8
+            )
+        }
+        .chartYAxis {
+            AxisMarks(
+                format: Decimal.FormatStyle.Percent.percent.scale(1),
+                values: [0, 25, 50, 75, 100]
+            )
+        }
     }
 }
 

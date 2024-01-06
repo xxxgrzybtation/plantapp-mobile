@@ -1,0 +1,113 @@
+
+[
+    {
+        "id": "1",
+        "name": "Stokrotka",
+        "data": [
+            {
+                "timestamp": 1702684527,
+                "value": 10
+            },
+            {
+                "timestamp": 1702688127,
+                "value": 55
+            },
+            {
+                "timestamp": 1702691727,
+                "value": 90
+            },
+            {
+                "timestamp": 1702695327,
+                "value": 47
+            },
+            {
+                "timestamp": 1702698927,
+                "value": 47
+            },
+            {
+                "timestamp": 1702702527,
+                "value": 52
+            },
+            {
+                "timestamp": 1702706127,
+                "value": 23
+            },
+            {
+                "timestamp": 1702713327,
+                "value": 75
+            },
+            {
+                "timestamp": 1702716927,
+                "value": 1
+            },
+            {
+                "timestamp": 1702720527,
+                "value": 58
+            },
+            {
+                "timestamp": 1702724127,
+                "value": 84
+            },
+            {
+                "timestamp": 1702727727,
+                "value": 35
+            }
+        ]
+    },
+    {
+        "id": "2",
+        "name": "Róża",
+        "data": [
+            {
+                "timestamp": 1679746800,
+                "value": 67
+            },
+            {
+                "timestamp": 1679833200,
+                "value": 71
+            },
+            {
+                "timestamp": 1679919600,
+                "value": 64
+            },
+            {
+                "timestamp": 1680006000,
+                "value": 79
+            },
+            {
+                "timestamp": 1680092400,
+                "value": 83
+            }
+        ]
+    },
+    {
+        "id": "3",
+        "name": "Kwiatek",
+        "data": [
+            {
+                "timestamp": 1704331922,
+                "value": 33
+            },
+            {
+                "timestamp": 1704335522,
+                "value": 49
+            },
+            {
+                "timestamp": 1704339122,
+                "value": 29
+            },
+            {
+                "timestamp": 1704342722,
+                "value": 38
+            },
+            {
+                "timestamp": 1704346322,
+                "value": 38
+            },
+            {
+                "timestamp": 1704349922,
+                "value": 42
+            }
+        ]
+    }
+]
