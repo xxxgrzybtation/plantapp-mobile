@@ -36,7 +36,15 @@ extension PlantDetailView {
                     Text("Oś X: Data pomiaru")
                 }
                 .font(.subheadline)
+            
+                Text("Zbyt duża wilgotność")
+                    .foregroundStyle(.blue)
+                Text("Idealna wilgotność")
+                    .foregroundStyle(.green)
+                Text("Zbyt niska wilgtność")
+                    .foregroundStyle(.red)
             }
+            .font(.footnote)
             Spacer()
         }
     }
@@ -47,6 +55,7 @@ extension PlantDetailView {
                 x: .value("Date", $0.timestamp),
                 y: .value("Value", $0.value), width: 8
             )
+            .foregroundStyle($0.value > 75 ? .blue : $0.value > 40 ? .green : .red)
         }
         .chartYAxis {
             AxisMarks(
